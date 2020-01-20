@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".SurpriseInfoActivity"
+    android:background="@drawable/bg"
+    >
+    
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_weight=".8"></View>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I have a solution for the thing on which you are most teased of\n(among us)\n\nWhich is"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HEIGHT"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        >
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\nOfcourse! I can\'t do it Naturally but why can't Virtually!"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+    </TextView>
+    
+
+    <Button
+        android:id="@+id/readyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="READY!"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        ></Button>
+    
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_weight="1"></View>
+    
+</LinearLayout>

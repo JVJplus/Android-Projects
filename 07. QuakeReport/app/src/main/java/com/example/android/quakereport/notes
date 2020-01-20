@@ -1,0 +1,4 @@
+private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2018-01-01&endtime=2019-01-02&minlatitude=6&maxlatitude=36&minlongitude=70&maxlongitude=98&limit=50&orderby=time";
+//    private static final String USGS_REQUEST_URL ="https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=1900-01-01&endtime=2020-01-02&minlatitude=23&maxlatitude=25&minlongitude=83&maxlongitude=88&limit=100&orderby=time";
+
+
