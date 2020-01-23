@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void addListenerToSearch() {
         SearchView searchView = (SearchView) findViewById(R.id.searchView);
+//        TODO: Remove Below Line Later!
+        searchView.setQuery("flowers home",false);
         searchView.setOnQueryTextListener(this);
     }
 

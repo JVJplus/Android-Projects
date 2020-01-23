@@ -1,8 +1,11 @@
 package com.jvjplus.booklistingapp;
 
+import java.util.ArrayList;
+
 public class BookDetails {
     String title,publisher,publishDate,description,smallThumbnailLink,thumbnailLink,language,previewLink,infoLink,buyLink;
-    double cost,avgRating,ratingsCount;
+    double amount,avgRating,ratingsCount;
+    boolean saleability;
     int pageCount;
-    String categories[], authors[];
+    ArrayList<String> categories,authors;
 }
