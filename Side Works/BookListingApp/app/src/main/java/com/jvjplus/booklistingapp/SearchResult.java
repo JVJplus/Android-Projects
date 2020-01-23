@@ -36,7 +36,7 @@ public class SearchResult extends AppCompatActivity {
 
         search_tv = (TextView) findViewById(R.id.search_tv);
         intent = getIntent();
-        progressBar=(ProgressBar)findViewById(R.id.progress);
+        progressBar = (ProgressBar) findViewById(R.id.progress);
         query = intent.getStringExtra("query");
         getSupportActionBar().setTitle("Results for: " + query);
 
@@ -49,7 +49,7 @@ public class SearchResult extends AppCompatActivity {
     //    LoadDatas.java
     public class LoadDatas extends AsyncTask<Void, Integer, String> {
 
-        int maxResult = 6,bookDetailsAvailable=maxResult;
+        int maxResult = 5, bookDetailsAvailable = maxResult;
         String query;
 
         public LoadDatas(String query) {
@@ -74,60 +74,108 @@ public class SearchResult extends AppCompatActivity {
 
             List<BookDetails> bookDetails = extractFeaturesFromJSON(jsonData);
 
-            //Print List
+//          Sanity Checking
+            String toStringValue="";
+            for (int i = 0; i < bookDetails.size(); i++) {
+//                Log.e("Books Details","\n\n\n"+bookDetails.get(i).toString());
+                toStringValue+=bookDetails.get(i).toString()+"\n\n--------------------------------------------------------------\n\n";
+            }
+            search_tv.setText(toStringValue);
         }
 
         private List<BookDetails> extractFeaturesFromJSON(String jsonData) {
             List<BookDetails> booksDetails = new ArrayList<BookDetails>();
             try {
-                JSONObject jsonObj= new JSONObject(jsonData);
-                JSONArray items=jsonObj.getJSONArray("items");
-                for(int i=0;i<items.length();i++){
-                    BookDetails singleItem=new BookDetails();
+                JSONObject jsonObj = new JSONObject(jsonData);
+                JSONArray items = jsonObj.getJSONArray("items");
+                for (int i = 0; i < items.length(); i++) {
+                    BookDetails singleItem = new BookDetails();
 
                     try {
                         JSONObject itemsObject = items.getJSONObject(i);
                         JSONObject volumeInfo = itemsObject.getJSONObject("volumeInfo");
-                            singleItem.title = volumeInfo.getString("title");
+                        singleItem.title = volumeInfo.getString("title");
 
-                            Log.e("Title", singleItem.title);
-
+                        try {
                             JSONArray authors = volumeInfo.getJSONArray("authors");
                             singleItem.authors = new ArrayList<String>();
                             for (int j = 0; j < authors.length(); j++) {
                                 singleItem.authors.add(authors.getString(j));
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                            singleItem.publisher = volumeInfo.getString("publisher");
-                            singleItem.publishDate = volumeInfo.getString("publishedDate");
-                            singleItem.description = volumeInfo.getString("description");
-                            singleItem.pageCount = volumeInfo.getInt("pageCount");
-
-                            JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                            singleItem.smallThumbnailLink = imageLinks.getString("smallThumbnail");
-                            singleItem.thumbnailLink = imageLinks.getString("thumbnail");
-
-                            singleItem.previewLink = volumeInfo.getString("previewLink");
-                            singleItem.infoLink = volumeInfo.getString("infoLink");
-
-                            JSONObject saleInfo = itemsObject.getJSONObject("saleInfo");
-                            singleItem.saleability=saleInfo.getString("saleability").matches("FOR_SALE");
-
-                            if(singleItem.saleability){
-                                JSONObject retailPrice=saleInfo.getJSONObject("retailPrice");
-                                singleItem.amount=retailPrice.getDouble("amount");
-                            }else{
-                                singleItem.amount=-1;
+                        try {
+                            JSONArray categories = volumeInfo.getJSONArray("categories");
+                            singleItem.categories = new ArrayList<String>();
+                            for (int j = 0; j < categories.length(); j++) {
+                                singleItem.categories.add(categories.getString(j));
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                            Log.e("Cost",singleItem.amount+"");
+                        try {
+                            singleItem.publisher = volumeInfo.getString("publisher");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            singleItem.publishDate = volumeInfo.getString("publishedDate");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            singleItem.description = volumeInfo.getString("description");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                            booksDetails.add(singleItem);
-                    }
-                    catch (Exception e){
+                        try {
+                            singleItem.language = volumeInfo.getString("language");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            singleItem.avgRating = volumeInfo.getDouble("averageRating");
+                            singleItem.ratingsCount = volumeInfo.getDouble("ratingsCount");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            singleItem.pageCount = volumeInfo.getInt("pageCount");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                        singleItem.smallThumbnailLink = imageLinks.getString("smallThumbnail");
+                        singleItem.thumbnailLink = imageLinks.getString("thumbnail");
+
+                        singleItem.previewLink = volumeInfo.getString("previewLink");
+                        singleItem.infoLink = volumeInfo.getString("infoLink");
+
+                        JSONObject saleInfo = itemsObject.getJSONObject("saleInfo");
+                        singleItem.saleability = saleInfo.getString("saleability").matches("FOR_SALE");
+
+                        if (singleItem.saleability) {
+                            JSONObject retailPrice = saleInfo.getJSONObject("retailPrice");
+                            singleItem.amount = retailPrice.getDouble("amount");
+                            singleItem.buyLink = saleInfo.getString("buyLink");
+                        } else {
+                            singleItem.amount = -1;
+                        }
+
+
+//                        Finally Add Item In container
+                        booksDetails.add(singleItem);
+                    } catch (Exception e) {
                         e.printStackTrace();
                         bookDetailsAvailable--;
-                        Toast.makeText(SearchResult.this, "Issues In extracting API "+i, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchResult.this, "Issues In extracting API " + i, Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (JSONException e) {
@@ -208,7 +256,7 @@ public class SearchResult extends AppCompatActivity {
 
             String url = "https://www.googleapis.com/books/v1/volumes?q=" + queryWithPlusSigns + "&maxResults=" + maxResult;
 
-            Log.e("Search Result: ", "generateAPI: " + url);
+            Log.e("generatedAPI:", url);
 
             return url;
         }

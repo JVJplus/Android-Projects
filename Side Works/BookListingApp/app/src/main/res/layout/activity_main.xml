@@ -7,17 +7,27 @@
     >
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:orientation="horizontal"
     >
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:queryHint="Book Name"
         android:iconifiedByDefault="false"
+        android:layout_weight="1"
+        />
+
+    <Button
+        android:id="@+id/search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Search"
         />
 
 </LinearLayout>
