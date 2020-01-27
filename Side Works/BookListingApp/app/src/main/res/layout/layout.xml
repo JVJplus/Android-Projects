@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="#07A197">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:padding="6dp"
+        android:src="@drawable/book_cover"></ImageView>
+
+    <LinearLayout
+        android:id="@+id/header_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/image">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="8dp"
+            android:text="Java Programming"
+            android:textColor="#ffffff"
+            android:textSize="16sp"></TextView>
+
+        <TextView
+            android:id="@+id/publisher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:text="John Wiley &amp; Sons"
+            android:textColor="#ffffff"
+            android:textSize="10sp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/authors_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_ll"
+        android:layout_toRightOf="@id/image">
+
+        <TextView
+            android:id="@+id/authors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Dawn Griffiths, ‎David Griffiths"
+            android:textColor="#ffffff"
+            android:textIsSelectable="false"
+            android:textSize="10sp"></TextView>
+
+        <TextView
+            android:id="@+id/published_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:text="2012"
+            android:textColor="#ffffff"
+            android:textSize="8sp"></TextView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/authors_ll"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/image"
+        android:text="Tags: Computer"
+        android:textColor="#ffffff"
+        android:textSize="8sp"></TextView>
+
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tags"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_toRightOf="@id/image"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:text="Finally, debug and distribute your first app on Google Play or other Android app store. After reading this book, you'll have your first app ready and on the app store, earning you the prestige and the money you seek."
+        android:textColor="#ffffff"
+        android:textSize="8sp"></TextView>
+
+    <LinearLayout
+        android:id="@+id/noOfPages_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/image">
+
+        <TextView
+            android:id="@+id/noOfPages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Number of Pages: 256"
+            android:textColor="#ffffff"
+            android:textSize="8sp"></TextView>
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:text="Rs 234.12"
+            android:textColor="#ffffff"
+            android:textSize="8sp"></TextView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noOfPages_ll"
+        android:layout_marginTop="-8dp"
+        android:layout_toRightOf="@id/image">
+
+        <RatingBar
+            android:id="@+id/ratings"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressTint="#FFD203"
+            android:rating="2.7"
+            android:layout_centerVertical="true"
+            android:stepSize="0.1"></RatingBar>
+
+        <TextView
+            android:id="@+id/noOfRatings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/ratings"
+            android:text="23 Votes"
+            android:textColor="#ffffff"
+            android:textSize="8sp"></TextView>
+
+
+        <Button
+            android:id="@+id/get_btn"
+            android:layout_width="40dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="#EC8282"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_centerVertical="true"
+            android:text="GET"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"></Button>
+
+        <Button
+            android:id="@+id/preview_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/get_btn"
+            android:backgroundTint="#237069"
+            android:minWidth="50dp"
+            android:padding="0dp"
+            android:text="PREVIEW"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"></Button>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

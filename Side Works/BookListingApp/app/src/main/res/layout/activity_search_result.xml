@@ -6,34 +6,29 @@
     android:layout_height="match_parent">
 
     <ProgressBar
+        android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress"
+        android:layout_centerInParent="true"
         android:layout_margin="32dp"
         android:indeterminate="true"
-        android:layout_centerInParent="true"
         android:indeterminateTint="#03A9F4"
-        android:indeterminateTintMode="src_in"
-        />
+        android:indeterminateTintMode="src_in" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="32dp"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal">
+        android:layout_margin="8dp">
 
-        <ScrollView
+<!--        Add List View Here-->
+        <ListView
+            android:id="@+id/result_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            ></ListView>
 
-            <TextView
-                android:id="@+id/search_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
-        </ScrollView>
 
-    </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

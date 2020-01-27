@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResult extends AppCompatActivity {
-    TextView search_tv;
     ProgressBar progressBar;
     Intent intent;
     String query;
@@ -34,17 +35,24 @@ public class SearchResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-        search_tv = (TextView) findViewById(R.id.search_tv);
         intent = getIntent();
         progressBar = (ProgressBar) findViewById(R.id.progress);
         query = intent.getStringExtra("query");
         getSupportActionBar().setTitle("Results for: " + query);
 
-//        TODO: from here
         LoadDatas datas = new LoadDatas(query);
         datas.execute();
     }
 
+    public void updateAdapter(ArrayList<BookDetails> bookDetails) {
+        Log.e("this----", bookDetails.get(0).toString());
+
+//        ListView container_view = (ListView) findViewById(R.id.result_container);
+//         get data from the table by the ListAdapter
+//        SearchResultAdapter customAdapter = new SearchResultAdapter(this, bookDetails);
+//        container_view.setAdapter(customAdapter);
+//      earthquakeListView.setEmptyView(mEmptyStateTextView);
+    }
 
     //    LoadDatas.java
     public class LoadDatas extends AsyncTask<Void, Integer, String> {
@@ -70,21 +78,11 @@ public class SearchResult extends AppCompatActivity {
 
             progressBar.setVisibility(View.GONE);
 
-            search_tv.setText(jsonData.toString());
-
-            List<BookDetails> bookDetails = extractFeaturesFromJSON(jsonData);
-
-//          Sanity Checking
-            String toStringValue="";
-            for (int i = 0; i < bookDetails.size(); i++) {
-//                Log.e("Books Details","\n\n\n"+bookDetails.get(i).toString());
-                toStringValue+=bookDetails.get(i).toString()+"\n\n--------------------------------------------------------------\n\n";
-            }
-            search_tv.setText(toStringValue);
+            new SearchResult().updateAdapter(extractFeaturesFromJSON(jsonData));
         }
 
-        private List<BookDetails> extractFeaturesFromJSON(String jsonData) {
-            List<BookDetails> booksDetails = new ArrayList<BookDetails>();
+        private ArrayList<BookDetails> extractFeaturesFromJSON(String jsonData) {
+            ArrayList<BookDetails> booksDetails = new ArrayList<BookDetails>();
             try {
                 JSONObject jsonObj = new JSONObject(jsonData);
                 JSONArray items = jsonObj.getJSONArray("items");
