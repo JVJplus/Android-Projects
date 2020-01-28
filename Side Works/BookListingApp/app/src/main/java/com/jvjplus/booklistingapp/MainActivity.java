@@ -19,6 +19,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        Exit App Not Working????
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         searchView = (SearchView) findViewById(R.id.searchView);
         searchBtn=(Button)findViewById(R.id.search_btn);
 

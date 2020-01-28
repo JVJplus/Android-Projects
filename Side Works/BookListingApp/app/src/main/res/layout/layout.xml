@@ -3,8 +3,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_container"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="130dp"
     android:background="#07A197">
 
     <ImageView
@@ -23,11 +24,11 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="8dp"
-            android:layout_weight="1"
+            android:layout_weight="2.5"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Java Programming is really long text right not"
@@ -36,13 +37,13 @@
 
         <TextView
             android:id="@+id/publisher"
-            android:layout_width="50dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_weight="30"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="end"
             android:maxLines="1"
@@ -198,7 +199,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/get_btn"
-            android:backgroundTint="#237069"
+            android:backgroundTint="#0A639A"
             android:minWidth="50dp"
             android:padding="0dp"
             android:text="PREVIEW"

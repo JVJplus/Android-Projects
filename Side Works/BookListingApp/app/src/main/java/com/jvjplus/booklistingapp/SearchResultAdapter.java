@@ -2,6 +2,7 @@ package com.jvjplus.booklistingapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Rating;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ public class SearchResultAdapter extends ArrayAdapter<BookDetails> {
         // Get the data item for this position
         BookDetails book = getItem(position);
 
-        Log.e("Title: ",book.title);
+//        Log.e("Title: ", book.title);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -34,43 +35,80 @@ public class SearchResultAdapter extends ArrayAdapter<BookDetails> {
         }
 
         // Lookup view for data population
-        TextView title=(TextView) convertView.findViewById(R.id.title);
+        TextView title = (TextView) convertView.findViewById(R.id.title);
         title.setText(book.title);
 
-        TextView authors=(TextView)convertView.findViewById(R.id.authors);
-        authors.setText(book.authors.get(0));
-//        Add other authors too
-//        Check if available!
 
-        TextView publishers=(TextView)convertView.findViewById(R.id.publisher);
+        TextView authors = (TextView) convertView.findViewById(R.id.authors);
+        String authorsText = book.authors.get(0);
+        if (book.authors.size() > 1)
+            authorsText += ", " + book.authors.get(1);
+        authors.setText(authorsText);
+
+
+        TextView publishers = (TextView) convertView.findViewById(R.id.publisher);
         publishers.setText(book.publisher);
 
-        TextView publishedDate=(TextView)convertView.findViewById(R.id.published_date);
+        TextView publishedDate = (TextView) convertView.findViewById(R.id.published_date);
         publishedDate.setText(book.publishDate);
 
-        TextView tags=(TextView)convertView.findViewById(R.id.tags);
-        if(book.categories!=null)
-            tags.setText("Tags: "+book.categories.get(0));
-        else
+        TextView tags = (TextView) convertView.findViewById(R.id.tags);
+        if (book.categories != null) {
+            String tagsString = "Tags: ";
+            for (int x = 0; x < book.categories.size() - 1; x++) {
+                tagsString += book.categories.get(x) + ", ";
+            }
+            tagsString += book.categories.get(book.categories.size() - 1);
+            tags.setText(tagsString);
+        } else
             tags.setVisibility(View.INVISIBLE);
 
-        TextView description=(TextView)convertView.findViewById(R.id.description);
+        TextView description = (TextView) convertView.findViewById(R.id.description);
         description.setText(book.description);
 
-        TextView noOfPages=(TextView)convertView.findViewById(R.id.noOfPages);
-        noOfPages.setText("Number of pages: "+book.pageCount);
+        TextView noOfPages = (TextView) convertView.findViewById(R.id.noOfPages);
+        if (book.pageCount == -1)
+            noOfPages.setVisibility(View.INVISIBLE);
+        else
+            noOfPages.setText("Number of pages: " + book.pageCount);
 
-        RatingBar rating=(RatingBar)convertView.findViewById(R.id.ratings);
+        RatingBar rating = (RatingBar) convertView.findViewById(R.id.ratings);
         rating.setRating((float) book.avgRating);
 
-        TextView ratingsCnt=(TextView)convertView.findViewById(R.id.noOfRatings);
-        ratingsCnt.setText(book.ratingsCount+" Votes");
+        TextView ratingsCnt = (TextView) convertView.findViewById(R.id.noOfRatings);
+        if (book.ratingsCount == -1)
+            ratingsCnt.setText("No Votes");
+        else
+            ratingsCnt.setText(book.ratingsCount + " Votes");
 
-        TextView cost=(TextView)convertView.findViewById(R.id.cost);
-        cost.setText("Rs "+book.amount);
+        TextView cost = (TextView) convertView.findViewById(R.id.cost);
+        if (book.amount == -1)
+//            cost.setText("Price Not Mentioned");
+            cost.setVisibility(View.INVISIBLE);
+        else
+            cost.setText("Rs " + book.amount);
 
+        String bg=getBackgroundColor((int) book.avgRating);
+        convertView.findViewById(R.id.layout_container).setBackgroundColor(Color.parseColor(bg));
 //        Handle Buttons Buy and Preview
 
         return convertView;
+    }
+
+    String getBackgroundColor(int ratings) {
+        switch (ratings) {
+            case 5:
+                return "#12B448";
+            case 4:
+                return "#07A197";
+            case 3:
+                return "#68539E";
+            case 2:
+                return "#9E537C";
+            case 1:
+                return "#B77F80";
+            default:
+                return "#6AADEE";
+        }
     }
 }

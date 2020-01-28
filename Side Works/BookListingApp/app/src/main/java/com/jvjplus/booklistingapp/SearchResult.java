@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +40,8 @@ public class SearchResult extends AppCompatActivity {
         intent = getIntent();
         progressBar = (ProgressBar) findViewById(R.id.progress);
         query = intent.getStringExtra("query");
-        getSupportActionBar().setTitle("Results for: " + query);
+        getSupportActionBar().setSubtitle("Results of: " + capitailizeWord(query));
+
 
         LoadDatas datas = new LoadDatas(query);
         datas.execute();
@@ -50,6 +52,20 @@ public class SearchResult extends AppCompatActivity {
         SearchResultAdapter customAdapter = new SearchResultAdapter(this, new ArrayList<BookDetails>());
 
         yourListView .setAdapter(customAdapter);
+    }
+
+    static String capitailizeWord(String str) {
+        StringBuffer s = new StringBuffer();
+
+        char ch = ' ';
+        for (int i = 0; i < str.length(); i++) {
+            if (ch == ' ' && str.charAt(i) != ' ')
+                s.append(Character.toUpperCase(str.charAt(i)));
+            else
+                s.append(str.charAt(i));
+            ch = str.charAt(i);
+        }
+        return s.toString().trim();
     }
 
     //    LoadDatas.java
