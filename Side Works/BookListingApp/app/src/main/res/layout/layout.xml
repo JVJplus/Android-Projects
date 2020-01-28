@@ -23,25 +23,30 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="8dp"
-            android:text="Java Programming"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Java Programming is really long text right not"
             android:textColor="#ffffff"
             android:textSize="16sp"></TextView>
 
         <TextView
             android:id="@+id/publisher"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:layout_weight="30"
             android:ellipsize="end"
             android:gravity="end"
-            android:text="John Wiley &amp; Sons"
+            android:maxLines="1"
+            android:text="John Wiley and its going long &amp; Sons"
             android:textColor="#ffffff"
             android:textSize="10sp"></TextView>
     </LinearLayout>
@@ -95,9 +100,9 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_below="@id/tags"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="8dp"
         android:layout_toRightOf="@id/image"
         android:ellipsize="end"
@@ -152,12 +157,12 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="#FFD203"
             android:rating="2.7"
-            android:layout_centerVertical="true"
             android:stepSize="0.1"></RatingBar>
 
         <TextView
@@ -178,10 +183,10 @@
             android:layout_height="28dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
             android:backgroundTint="#EC8282"
             android:minHeight="0dp"
             android:padding="0dp"
-            android:layout_centerVertical="true"
             android:text="GET"
             android:textColor="@android:color/white"
             android:textSize="8sp"></Button>
@@ -190,8 +195,8 @@
             android:id="@+id/preview_btn"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/get_btn"
             android:backgroundTint="#237069"
             android:minWidth="50dp"

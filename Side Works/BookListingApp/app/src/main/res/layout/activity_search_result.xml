@@ -15,20 +15,15 @@
         android:indeterminateTint="#03A9F4"
         android:indeterminateTintMode="src_in" />
 
-    <ScrollView
+
+    <!--        Add List View Here-->
+    <ListView
+        android:id="@+id/result_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp">
-
-<!--        Add List View Here-->
-        <ListView
-            android:id="@+id/result_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            ></ListView>
-
-
-    </ScrollView>
-
+        android:layout_margin="8dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8.0dp"
+        ></ListView>
 
 </RelativeLayout>

@@ -24,6 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class SearchResult extends AppCompatActivity {
     ProgressBar progressBar;
@@ -42,22 +43,19 @@ public class SearchResult extends AppCompatActivity {
 
         LoadDatas datas = new LoadDatas(query);
         datas.execute();
-    }
 
-    public void updateAdapter(ArrayList<BookDetails> bookDetails) {
-        Log.e("this----", bookDetails.get(0).toString());
+        ListView yourListView = (ListView) findViewById(R.id.result_container);
 
-//        ListView container_view = (ListView) findViewById(R.id.result_container);
-//         get data from the table by the ListAdapter
-//        SearchResultAdapter customAdapter = new SearchResultAdapter(this, bookDetails);
-//        container_view.setAdapter(customAdapter);
-//      earthquakeListView.setEmptyView(mEmptyStateTextView);
+        // get data from the table by the ListAdapter
+        SearchResultAdapter customAdapter = new SearchResultAdapter(this, new ArrayList<BookDetails>());
+
+        yourListView .setAdapter(customAdapter);
     }
 
     //    LoadDatas.java
     public class LoadDatas extends AsyncTask<Void, Integer, String> {
 
-        int maxResult = 5, bookDetailsAvailable = maxResult;
+        int maxResult = 8, bookDetailsAvailable = maxResult;
         String query;
 
         public LoadDatas(String query) {
@@ -78,7 +76,16 @@ public class SearchResult extends AppCompatActivity {
 
             progressBar.setVisibility(View.GONE);
 
-            new SearchResult().updateAdapter(extractFeaturesFromJSON(jsonData));
+            updateAdapter(extractFeaturesFromJSON(jsonData));
+        }
+
+        private void updateAdapter(ArrayList<BookDetails> bookDetails){
+//            Toast.makeText(SearchResult.this, bookDetailsAvailable+" Books Found! and length: "+bookDetails.size(), Toast.LENGTH_SHORT).show();
+
+            ListView yourListView = (ListView) findViewById(R.id.result_container);
+            // get data from the table by the ListAdapter
+            SearchResultAdapter customAdapter = new SearchResultAdapter(getApplicationContext(),bookDetails);
+            yourListView.setAdapter(customAdapter);
         }
 
         private ArrayList<BookDetails> extractFeaturesFromJSON(String jsonData) {
@@ -101,7 +108,7 @@ public class SearchResult extends AppCompatActivity {
                                 singleItem.authors.add(authors.getString(j));
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
 
                         try {
@@ -111,42 +118,42 @@ public class SearchResult extends AppCompatActivity {
                                 singleItem.categories.add(categories.getString(j));
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
 
                         try {
                             singleItem.publisher = volumeInfo.getString("publisher");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
                         try {
                             singleItem.publishDate = volumeInfo.getString("publishedDate");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
                         try {
                             singleItem.description = volumeInfo.getString("description");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
 
                         try {
                             singleItem.language = volumeInfo.getString("language");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
 
                         try {
                             singleItem.avgRating = volumeInfo.getDouble("averageRating");
                             singleItem.ratingsCount = volumeInfo.getDouble("ratingsCount");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
                         }
 
                         try {
                             singleItem.pageCount = volumeInfo.getInt("pageCount");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
 
                         JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
@@ -166,7 +173,6 @@ public class SearchResult extends AppCompatActivity {
                         } else {
                             singleItem.amount = -1;
                         }
-
 
 //                        Finally Add Item In container
                         booksDetails.add(singleItem);
