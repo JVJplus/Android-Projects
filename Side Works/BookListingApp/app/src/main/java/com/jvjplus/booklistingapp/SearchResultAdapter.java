@@ -99,6 +99,7 @@ public class SearchResultAdapter extends ArrayAdapter<BookDetails> {
             cost.setText("Rs " + book.amount);
 
         String bg=getBackgroundColor((int) book.avgRating);
+        bg="#B3"+bg.substring(1); //set opacity to 50%
         convertView.findViewById(R.id.layout_container).setBackgroundColor(Color.parseColor(bg));
 
 //        Add Image

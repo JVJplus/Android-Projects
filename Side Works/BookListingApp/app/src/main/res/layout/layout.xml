@@ -6,7 +6,7 @@
     android:id="@+id/layout_container"
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    android:background="#07A197">
+    android:background="#8007A197">
 
     <ImageView
         android:id="@+id/image"
@@ -61,18 +61,23 @@
 
         <TextView
             android:id="@+id/authors"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="Dawn Griffiths, ‎David Griffiths"
             android:textColor="#ffffff"
+            android:layout_weight="1"
             android:textIsSelectable="false"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="10sp"></TextView>
 
         <TextView
             android:id="@+id/published_date"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
             android:layout_height="wrap_content"
+            android:minWidth="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="8dp"
