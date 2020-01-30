@@ -185,10 +185,10 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
-            android:backgroundTint="#EC8282"
+            android:backgroundTint="#E76C6C"
             android:minHeight="0dp"
             android:padding="0dp"
-            android:text="GET"
+            android:text="BUY"
             android:textColor="@android:color/white"
             android:textSize="8sp"></Button>
 
@@ -199,7 +199,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/get_btn"
-            android:backgroundTint="#0A639A"
+            android:backgroundTint="#006064"
             android:minWidth="50dp"
             android:padding="0dp"
             android:text="PREVIEW"

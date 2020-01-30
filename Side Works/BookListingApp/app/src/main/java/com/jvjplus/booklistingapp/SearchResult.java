@@ -2,7 +2,11 @@ package com.jvjplus.booklistingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -17,6 +22,7 @@ import android.widget.Toolbar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -31,6 +37,9 @@ public class SearchResult extends AppCompatActivity {
     ProgressBar progressBar;
     Intent intent;
     String query;
+    boolean showMultiColors;
+    TextView error_TV;
+    int maxResult, bookDetailsAvailable = maxResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +49,33 @@ public class SearchResult extends AppCompatActivity {
         intent = getIntent();
         progressBar = (ProgressBar) findViewById(R.id.progress);
         query = intent.getStringExtra("query");
+        maxResult = intent.getIntExtra("noOfResults", 8);
+        showMultiColors = intent.getBooleanExtra("showMultiColors", true);
+
+        error_TV=(TextView)findViewById(R.id.error_msg_TV);
         getSupportActionBar().setSubtitle("Results of: " + capitailizeWord(query));
 
 
-        LoadDatas datas = new LoadDatas(query);
-        datas.execute();
 
-        ListView yourListView = (ListView) findViewById(R.id.result_container);
+//        Check Network Access
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        // get data from the table by the ListAdapter
-        SearchResultAdapter customAdapter = new SearchResultAdapter(this, new ArrayList<BookDetails>());
+        // If there is a network connection, fetch data
+        if (networkInfo != null && networkInfo.isConnected()) {
 
-        yourListView .setAdapter(customAdapter);
+//        Fetch JSON
+            LoadDatas datas = new LoadDatas(query);
+            datas.execute();
+        } else {
+            // Otherwise, display error
+            // First, hide loading indicator so error message will be visible
+            View loadingIndicator = findViewById(R.id.progress);
+            loadingIndicator.setVisibility(View.GONE);
+
+            error_TV.setText("No Internet Connection.");
+        }
     }
 
     static String capitailizeWord(String str) {
@@ -70,8 +94,6 @@ public class SearchResult extends AppCompatActivity {
 
     //    LoadDatas.java
     public class LoadDatas extends AsyncTask<Void, Integer, String> {
-
-        int maxResult = 8, bookDetailsAvailable = maxResult;
         String query;
 
         public LoadDatas(String query) {
@@ -95,13 +117,16 @@ public class SearchResult extends AppCompatActivity {
             updateAdapter(extractFeaturesFromJSON(jsonData));
         }
 
-        private void updateAdapter(ArrayList<BookDetails> bookDetails){
+        private void updateAdapter(ArrayList<BookDetails> bookDetails) {
 //            Toast.makeText(SearchResult.this, bookDetailsAvailable+" Books Found! and length: "+bookDetails.size(), Toast.LENGTH_SHORT).show();
 
             ListView yourListView = (ListView) findViewById(R.id.result_container);
             // get data from the table by the ListAdapter
-            SearchResultAdapter customAdapter = new SearchResultAdapter(getApplicationContext(),bookDetails);
+            SearchResultAdapter customAdapter = new SearchResultAdapter(getApplicationContext(), bookDetails, showMultiColors);
             yourListView.setAdapter(customAdapter);
+
+            if(bookDetails.size()==0)
+                error_TV.setText("No Data Found.");
         }
 
         private ArrayList<BookDetails> extractFeaturesFromJSON(String jsonData) {
@@ -195,12 +220,12 @@ public class SearchResult extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                         bookDetailsAvailable--;
-                        Toast.makeText(SearchResult.this, "Issues In extracting API " + i, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SearchResult.this, "Issues In extracting API " + i, Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                Toast.makeText(SearchResult.this, "Errors on API!", Toast.LENGTH_SHORT).show();
+                Log.e("Exception : ", "Errors On API!");
             }
             return booksDetails;
         }

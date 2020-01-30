@@ -4,33 +4,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:orientation="horizontal"
-    >
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Book Name"
-        android:iconifiedByDefault="false"
-        android:layout_weight="1"
-        />
+        android:layout_centerInParent="true">
 
-    <Button
-        android:id="@+id/search_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Search"
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
 
-</LinearLayout>
+            <LinearLayout
+                android:id="@+id/search_bar_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="16dp">
 
+                <SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Book Name" />
+
+                <Button
+                    android:id="@+id/search_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Search" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider_search_details"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/search_bar_ll"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@android:color/darker_gray"></View>
+
+            <LinearLayout
+                android:id="@+id/additional_buttons_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_search_details"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <LinearLayout
+                    android:id="@+id/checkbox_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true">
+
+                    <net.igenius.customcheckbox.CustomCheckBox
+                        android:id="@+id/multicolor_checkbox"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        app:color_checked="@color/colorPrimary"
+                        app:color_tick="@android:color/white"
+                        app:color_unchecked="@color/colorAccent"
+                        app:color_unchecked_stroke="@color/colorAccent"
+                        app:small_tick="true" />
+
+                    <TextView
+                        android:id="@+id/checkbox_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:text="Show Multi-Color\nLayouts"></TextView>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/random_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:minWidth="40dp"
+                    android:padding="8dp"
+                    android:text="Generate Random\n Word"></Button>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/seekBar_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/additional_buttons_ll"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/seekBarTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Max Result:"></TextView>
+
+                <com.xw.repo.BubbleSeekBar
+                    android:id="@+id/noOfResultsSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:bsb_bubble_color="#004d40"
+                    app:bsb_bubble_text_color="@android:color/white"
+                    app:bsb_max="24"
+                    app:bsb_min="1"
+                    app:bsb_progress="8"
+                    app:bsb_second_track_color="#00897b"
+                    app:bsb_section_count="1"
+                    app:bsb_section_text_position="bottom_sides"
+                    app:bsb_show_progress_in_float="false"
+                    app:bsb_show_section_mark="true"
+                    app:bsb_show_section_text="true"
+                    app:bsb_show_thumb_text="true"
+                    app:bsb_track_color="@android:color/darker_gray" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
