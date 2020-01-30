@@ -1,34 +1,24 @@
-# Book Listing App
-I got this project as an assignment on udacity online course.
+# Android Projects
+---
 
-This app takes book name as input from user and display list of related books fetching online from Google Books API. 
+1. [Birthday Wishing App](https://github.com/JVJplus/Android-Projects/tree/master/01.%20Birthday%20Greeting%20App)
+    
+    >Simple App To Print Text and Display Image Using Relative Layouts!
 
-## Additional Features
+    > ![App Preview](https://raw.githubusercontent.com/JVJplus/Android-Projects/master/01.%20Birthday%20Greeting%20App/app%20preview.jpg)
 
-1) **SeekBar** to select how many list of books to display on result.
-2) **CheckBox** to select Whether user want to see single color or multiple color based on ratings of book.
-3) **Abstract Background** to add visual polish.
-4) Generating **Random** Word.
+2. [Coffee Price Calculator](https://github.com/JVJplus/Android-Projects/tree/master/02.%20Playing%20With%20Buttons)
+    
+    >Simple App To Calculate the price of Selected Quantity using Buttons and Events.
 
-## What I Learnt
-1) Using Async Task To Load JSON Data from API.
-2) Display Data Using List View Adapter.
-3) Adding Additional Libraries into App.
-4) Loading Image using Glide Library.
-5) **Debugging** Skills!! :P
+    > ![App Preview](https://raw.githubusercontent.com/JVJplus/Android-Projects/master/02.%20Playing%20With%20Buttons/demo%20Playing%20with%20Buttons.jpg)>
 
-### Time Taken
-10 days approx, started this project on 19th Jan 2020, and finally finished on 30th Jan 2020. 
+3. [Court Counter](https://github.com/JVJplus/Android-Projects/tree/master/03.CourtCounter)
 
-Leaving Some Bugs and Features which required some major changes on code. :P
+     >App To Simulate the basketball and find winner accordingly. Made using Layouts, Buttons and Events.
 
-### Things To Add
-1) Custom Logo
-2) Swipe Down To Reload
-3) Good UI :P
-4) Progress Bar
-5) Sort By Price/Popularity/Ratings etc
-6) Filter Free, Ebook, etc
-7) Add History Button
+     > ![App Preview](https://github.com/JVJplus/Android-Projects/blob/master/03.CourtCounter/demo.jpg?raw=true)
 
-8) Do Suggest Them! :B
+
+
+## Will Update Later If I Get Some Time! :P        
